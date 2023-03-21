@@ -43,6 +43,7 @@
 		F617A66229B78CEA004CADEB /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F617A65B29B78CEA004CADEB /* libswresample.a */; };
 		F617A66329B78CEA004CADEB /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F617A65C29B78CEA004CADEB /* libavdevice.a */; };
 		F617A66429B78CEA004CADEB /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F617A65D29B78CEA004CADEB /* libavutil.a */; };
+		F6490DB429C994C200D46F6D /* SelectedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6490DB329C994C200D46F6D /* SelectedView.m */; };
 		F65C731C29C0CFB000FC59D2 /* SCCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = F65C731B29C0CFB000FC59D2 /* SCCollection.m */; };
 		F66B790829B8993A00A1A40E /* TimeShaftItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F66B790729B8993A00A1A40E /* TimeShaftItem.m */; };
 		F66B790B29B8B2A500A1A40E /* Quality.m in Sources */ = {isa = PBXBuildFile; fileRef = F66B790A29B8B2A500A1A40E /* Quality.m */; };
@@ -132,6 +133,8 @@
 		F617A65B29B78CEA004CADEB /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = SCCut/ffmpeglib/lib/libswresample.a; sourceTree = "<group>"; };
 		F617A65C29B78CEA004CADEB /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = SCCut/ffmpeglib/lib/libavdevice.a; sourceTree = "<group>"; };
 		F617A65D29B78CEA004CADEB /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = SCCut/ffmpeglib/lib/libavutil.a; sourceTree = "<group>"; };
+		F6490DB229C994C200D46F6D /* SelectedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectedView.h; sourceTree = "<group>"; };
+		F6490DB329C994C200D46F6D /* SelectedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectedView.m; sourceTree = "<group>"; };
 		F65C731A29C0CFB000FC59D2 /* SCCollection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCollection.h; sourceTree = "<group>"; };
 		F65C731B29C0CFB000FC59D2 /* SCCollection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCollection.m; sourceTree = "<group>"; };
 		F66B790629B8993A00A1A40E /* TimeShaftItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeShaftItem.h; sourceTree = "<group>"; };
@@ -354,6 +357,8 @@
 				F695D33F29C092E300035976 /* IndexModel.m */,
 				F65C731A29C0CFB000FC59D2 /* SCCollection.h */,
 				F65C731B29C0CFB000FC59D2 /* SCCollection.m */,
+				F6490DB229C994C200D46F6D /* SelectedView.h */,
+				F6490DB329C994C200D46F6D /* SelectedView.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -758,6 +763,7 @@
 				F617A1F929B713B6004CADEB /* AppDelegate.m in Sources */,
 				F617A50629B7406D004CADEB /* MASCompositeConstraint.m in Sources */,
 				F695D33D29C082B400035976 /* QualityModel.m in Sources */,
+				F6490DB429C994C200D46F6D /* SelectedView.m in Sources */,
 				F617A50729B7406D004CADEB /* MASConstraintMaker.m in Sources */,
 				F617A50529B7406D004CADEB /* ViewController+MASAdditions.m in Sources */,
 				F66B790829B8993A00A1A40E /* TimeShaftItem.m in Sources */,

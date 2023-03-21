@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Quality : NSObject
 
 +(void)QualitychangeInput:(AVURLAsset *)videoAsset witchIndex:(NSInteger)index;
++(void)GetFramesMetal:(AVURLAsset *)videoAsset witchIndex:(NSInteger)index;
 
 @end
 

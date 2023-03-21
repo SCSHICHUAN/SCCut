@@ -18,5 +18,6 @@
 #define W = (iphone_6_w/(K_WIDTH * 1.0))
 #define H = (iphone_6_h/(K_HEIGHT * 1.0))
 
+#define k_window [[[UIApplication sharedApplication] delegate] window]
 
 #endif /* Dimension_h */

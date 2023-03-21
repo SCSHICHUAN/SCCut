@@ -14,19 +14,19 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CacheModel.h"
 #import "QualityModel.h"
-#import "SCCollection.h"
+#import "SCCollection.h"model.gorup_index
+#import "SelectedView.h"
 
 
 
 
-
-@interface CutControler ()<UICollectionViewDataSource,SCCollectionDelegate,UIScrollViewDelegate>
+@interface CutControler ()<UICollectionViewDataSource,UICollectionViewDelegate,SCCollectionDelegate,UIScrollViewDelegate>
 {
     MBProgressHUD *hud;
 }
 @property(nonatomic,strong)UIButton *backBtn;
 @property(nonatomic,strong)UIButton *pleyBtn;
-@property(nonatomic,strong)SCCollection *time_collectView;
+@property(nonatomic,strong)UICollectionView *time_collectView;
 @property(nonatomic,strong)NSMutableArray *timeShaftArry;
 @property(nonatomic,strong)UIImageView *imgView;
 @property(nonatomic,strong)NSTimer *time;
@@ -37,10 +37,18 @@
 @property(nonatomic,strong)NSMutableArray *cacheFrameImg;
 @property(nonatomic,strong)AVMutableComposition *workbench;
 @property(nonatomic,assign)BOOL b;
+@property(nonatomic,strong)SelectedView *selectView;
 @end
 
 
 @implementation CutControler
+-(SelectedView *)selectView{
+    UIImageView *right;
+    if(!_selectView){
+        _selectView = [[SelectedView alloc] init];
+    }
+    return _selectView;
+}
 -(NSMutableArray *)cacheFrameImg{
     if(!_cacheFrameImg){
         _cacheFrameImg = [NSMutableArray array];
@@ -95,19 +103,19 @@
     }
     return _imgView;
 }
--(SCCollection *)time_collectView{
+-(UICollectionView *)time_collectView{
     if(!_time_collectView){
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.itemSize = CGSizeMake(50, 50);
         layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _time_collectView = [[SCCollection alloc] initWithFrame:CGRectMake(0, K_HEIGHT-400, K_WIDTH, 60) collectionViewLayout:layout];
+        _time_collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, K_HEIGHT-400, K_WIDTH, 50) collectionViewLayout:layout];
         [_time_collectView registerClass:[TimeShaftItem class] forCellWithReuseIdentifier:timeShaftItemIdent];
         _time_collectView.dataSource = self;
         _time_collectView.contentInset = UIEdgeInsetsMake(0, K_WIDTH/2.0, 0, K_WIDTH/2.0);
-        _time_collectView.sCCollectionDelegate = self;
-        _time_collectView.delegate = (id)self;
+//        _time_collectView.sCCollectionDelegate = self;
+        _time_collectView.delegate = self;
     }
     return _time_collectView;
 }
@@ -116,15 +124,6 @@
         _timeShaftArry = [NSMutableArray array];
     }
     return _timeShaftArry;
-}
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.timeShaftArry.count;
-}
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    TimeShaftItem *item = [collectionView dequeueReusableCellWithReuseIdentifier:timeShaftItemIdent forIndexPath:indexPath];
-    QualityModel *model =  self.timeShaftArry[indexPath.item];
-    item.image = model.img;
-    return item;
 }
 
 -(void)addPlayItem{
@@ -164,7 +163,7 @@
     [self.view addSubview:self.backBtn];
     [self.view addSubview:self.pleyBtn];
     [self.view addSubview:self.time_collectView];
-    [self.view addSubview:self.imgView];
+//    [self.view addSubview:self.imgView];
     [self.view addSubview:self.scaleLine];
     [self.view addSubview:self.lab];
     _playItem = 0;
@@ -186,6 +185,28 @@
     
     self.b = YES;
 }
+#pragma mark-UICollectionViewDataSource
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.timeShaftArry.count;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    TimeShaftItem *item = [collectionView dequeueReusableCellWithReuseIdentifier:timeShaftItemIdent forIndexPath:indexPath];
+    QualityModel *model =  self.timeShaftArry[indexPath.item];
+    item.qualityModel = model;
+    return item;
+}
+#pragma mark-UICollectionViewDelegate
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    QualityModel *model = self.timeShaftArry[indexPath.item];
+    NSLog(@"model.gorup_index:%ld",(long)model.gorup_index);
+    
+    self.selectView.frame = CGRectMake(-20, 0, 100, 50);
+    [self.time_collectView addSubview:self.selectView];
+}
+
+
+
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     int index = (self.time_collectView.contentOffset.x + K_WIDTH/2.0)/50;
     if (self.timeShaftArry.count <= 0 || index >= self.timeShaftArry.count) return;
@@ -200,6 +221,7 @@
     if(!self.b)return;
     float offxet = x + K_WIDTH/2.0;
     if(offxet < 0) return;
+    
     CMTimeValue value = ((offxet * 1000)/((self.timeShaftArry.count * 50 * 1000.0))) * self.workbench.duration.value;
     CMTime seekTime = CMTimeMake(value, self.workbench.duration.timescale);
     

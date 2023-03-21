@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QualityModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -14,7 +14,7 @@ static  NSString *timeShaftItemIdent = @"TimeShaftItem";
 
 @interface TimeShaftItem : UICollectionViewCell
 
-@property(nonatomic,strong)UIImage *image;
+@property(nonatomic,strong)QualityModel *qualityModel;
 
 @end
 

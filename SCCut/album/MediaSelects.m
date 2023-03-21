@@ -220,6 +220,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
             [self.photos addObject:obj];
         }
     }];
+    
+    
 }
 //从相册获取视频
 -(void)loadVides

@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,assign)NSInteger gorup_index;
 @property(nonatomic,assign)NSInteger index;
 @property(nonatomic,strong)UIImage *img;
+@property(nonatomic,strong)CIImage *ciimg;
+@property(nonatomic,assign)CVPixelBufferRef buff;
+@property(nonatomic,assign)int64_t value;
+@property(nonatomic,assign)BOOL selected;
 
 
 

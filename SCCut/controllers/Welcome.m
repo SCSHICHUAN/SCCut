@@ -65,6 +65,7 @@
         CacheModel *model = sources[i];
         if(model.mediaType == MediaType_video){
             [Quality QualitychangeInput:model.avAsset witchIndex:i];
+//            [Quality GetFramesMetal:model.avAsset witchIndex:i];
         }
     }
 }
