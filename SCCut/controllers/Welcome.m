@@ -61,8 +61,6 @@
     [cut addPlayItem];
     [self.navigationController presentViewController:cut animated:YES completion:nil];
     
-
-    return;
     
     NSMutableArray *session = [NSMutableArray array];
     for (NSInteger i = 0; i < sources.count; i++) {

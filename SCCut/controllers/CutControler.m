@@ -55,6 +55,7 @@ UIScrollViewDelegate>
     AVMutableCompositionTrack *mainVideoTrack = [workbench addMutableTrackWithMediaType:AVMediaTypeVideo preferredTrackID:kCMPersistentTrackID_Invalid];
     AVMutableCompositionTrack *mainAudioTrack = [workbench addMutableTrackWithMediaType:AVMediaTypeAudio preferredTrackID:kCMPersistentTrackID_Invalid];
     
+    self.assetArray = (NSMutableArray *)self.assetArray.reverseObjectEnumerator.allObjects;
     for (CacheModel *model in self.assetArray) {
         
        
@@ -122,11 +123,16 @@ UIScrollViewDelegate>
 #pragma mark-UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    NSMutableArray *part = self.sourceSessionArry[indexPath.item];
 //    FrameModel *model = self.timeShaftArry[indexPath.item];
 //    NSLog(@"model.gorup_index:%ld",(long)model.gorup_index);
 //
-//    self.selectView.frame = CGRectMake(-20, 0, 100, 50);
-//    [self.seccionCollectView addSubview:self.selectView];
+  
+    SeccionItem *item = (SeccionItem *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    self.selectView.frame = item.frame;
+    [self.seccionCollectView addSubview:self.selectView];
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableArray *part = self.sourceSessionArry[indexPath.item];
