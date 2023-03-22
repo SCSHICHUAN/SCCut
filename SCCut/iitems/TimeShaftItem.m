@@ -42,27 +42,29 @@
     self.imageV.layer.borderColor = UIColor.whiteColor.CGColor;
 }
 
--(void)setQualityModel:(QualityModel *)qualityModel{
-    _qualityModel = qualityModel;
-    self.imageV.image = qualityModel.img;
-    
+-(void)setFrameModel:(FrameModel *)frameModel{
+    _frameModel = frameModel;
+    self.imageV.image = frameModel.img;
     
     return;
     
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            CIImage *ciImage = qualityModel.ciimg;
-               CIContext *ciContext = [[CIContext alloc] init];
-            CGImageRef cgImage = [ciContext createCGImage:ciImage fromRect:CGRectMake(0, 0, CVPixelBufferGetWidth(qualityModel.buff), CVPixelBufferGetHeight(qualityModel.buff))];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        CIImage *ciImage = frameModel.ciimg;
+           CIContext *ciContext = [[CIContext alloc] init];
+        CGImageRef cgImage = [ciContext createCGImage:ciImage fromRect:CGRectMake(0, 0, CVPixelBufferGetWidth(frameModel.buff), CVPixelBufferGetHeight(frameModel.buff))];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.imageV.layer.contentsRect = CGRectMake(0, 0, 1, 1);
+            self.imageV.layer.contents = (__bridge id)cgImage;
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageV.layer.contentsRect = CGRectMake(0, 0, 1, 1);
-                self.imageV.layer.contents = (__bridge id)cgImage;
-                
-                // 释放 CGImage 和 CMSampleBuffer
-                CGImageRelease(cgImage);
-            });
+            // 释放 CGImage 和 CMSampleBuffer
+            CGImageRelease(cgImage);
         });
+    });
+    
 }
+
+
 
 
 

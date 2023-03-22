@@ -1,5 +1,5 @@
 //
-//  Quality.h
+//  GetFrame.h
 //  SCCut
 //
 //  Created by Stan on 2023/3/8.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class AVURLAsset;
-@interface Quality : NSObject
+@interface GetFrame : NSObject
 
 +(void)QualitychangeInput:(AVURLAsset *)videoAsset witchIndex:(NSInteger)index;
 +(void)GetFramesMetal:(AVURLAsset *)videoAsset witchIndex:(NSInteger)index;

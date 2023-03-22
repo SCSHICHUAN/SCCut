@@ -6,14 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "QualityModel.h"
+#import "FrameModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface IndexModel : NSObject
 
 @property(nonatomic,assign)NSInteger gorup_index;
 @property(nonatomic,assign)NSInteger index;
-@property(nonatomic,strong)QualityModel *model;
+@property(nonatomic,strong)FrameModel *model;
 
 @end
 

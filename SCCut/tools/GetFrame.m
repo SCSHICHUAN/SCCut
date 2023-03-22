@@ -1,17 +1,17 @@
 //
-//  Quality.m
+//  GetFrame.m
 //  SCCut
 //
 //  Created by Stan on 2023/3/8.
 //
 
-#import "Quality.h"
+#import "GetFrame.h"
 #import <AVKit/AVKit.h>
-#import "QualityModel.h"
+#import "FrameModel.h"
 #import <MetalKit/MetalKit.h>
 
 
-@implementation Quality
+@implementation GetFrame
 
 
 +(void)QualitychangeInput:(AVURLAsset *)videoAsset witchIndex:(NSInteger)index{
@@ -43,11 +43,12 @@
                 AVAssetImageGeneratorResult result,
                 NSError *error) {
         
+        
         if (result == AVAssetImageGeneratorSucceeded) {
             UIImage *image = [UIImage imageWithCGImage:imageRef];
             
             
-            QualityModel *model = [[QualityModel alloc] init];
+            FrameModel *model = [[FrameModel alloc] init];
             model.gorup_index = index;
             model.index = item_index;
             model.img = image;
@@ -120,7 +121,7 @@
         CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
 
       
-        __block NSInteger item_index = index;
+        __block NSInteger item_index = 0;
         // 读取视频帧并转换为 UIImage
         while (reader.status == AVAssetReaderStatusReading) {
             

@@ -1,5 +1,5 @@
 //
-//  QualityModel.h
+//  FrameModel.h
 //  SCCut
 //
 //  Created by Stan on 2023/3/14.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QualityModel : NSObject
+@interface FrameModel : NSObject
 
 @property(nonatomic,assign)NSInteger gorup_index;
 @property(nonatomic,assign)NSInteger index;

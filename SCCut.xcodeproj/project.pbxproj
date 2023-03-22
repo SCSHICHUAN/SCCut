@@ -44,9 +44,10 @@
 		F617A66329B78CEA004CADEB /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F617A65C29B78CEA004CADEB /* libavdevice.a */; };
 		F617A66429B78CEA004CADEB /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F617A65D29B78CEA004CADEB /* libavutil.a */; };
 		F6490DB429C994C200D46F6D /* SelectedView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6490DB329C994C200D46F6D /* SelectedView.m */; };
+		F6490DB729CAEBE500D46F6D /* SeccionItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6490DB629CAEBE500D46F6D /* SeccionItem.m */; };
 		F65C731C29C0CFB000FC59D2 /* SCCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = F65C731B29C0CFB000FC59D2 /* SCCollection.m */; };
 		F66B790829B8993A00A1A40E /* TimeShaftItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F66B790729B8993A00A1A40E /* TimeShaftItem.m */; };
-		F66B790B29B8B2A500A1A40E /* Quality.m in Sources */ = {isa = PBXBuildFile; fileRef = F66B790A29B8B2A500A1A40E /* Quality.m */; };
+		F66B790B29B8B2A500A1A40E /* GetFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = F66B790A29B8B2A500A1A40E /* GetFrame.m */; };
 		F68E1EDF29B790A2006C4762 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F68E1EDE29B790A2006C4762 /* libbz2.tbd */; };
 		F68E1EE129B790B3006C4762 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F68E1EE029B790B3006C4762 /* libz.tbd */; };
 		F68E1EE329B790DF006C4762 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F68E1EE229B790DE006C4762 /* libiconv.tbd */; };
@@ -55,7 +56,7 @@
 		F68E1EE929B7911F006C4762 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F68E1EE829B7911F006C4762 /* VideoToolbox.framework */; };
 		F68E1EEB29B7912F006C4762 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F68E1EEA29B7912F006C4762 /* CoreAudio.framework */; };
 		F68E1EED29B79154006C4762 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F68E1EEC29B79154006C4762 /* CoreMedia.framework */; };
-		F695D33D29C082B400035976 /* QualityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F695D33C29C082B400035976 /* QualityModel.m */; };
+		F695D33D29C082B400035976 /* FrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F695D33C29C082B400035976 /* FrameModel.m */; };
 		F695D34029C092E300035976 /* IndexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F695D33F29C092E300035976 /* IndexModel.m */; };
 /* End PBXBuildFile section */
 
@@ -135,12 +136,14 @@
 		F617A65D29B78CEA004CADEB /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = SCCut/ffmpeglib/lib/libavutil.a; sourceTree = "<group>"; };
 		F6490DB229C994C200D46F6D /* SelectedView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectedView.h; sourceTree = "<group>"; };
 		F6490DB329C994C200D46F6D /* SelectedView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectedView.m; sourceTree = "<group>"; };
+		F6490DB529CAEBE500D46F6D /* SeccionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeccionItem.h; sourceTree = "<group>"; };
+		F6490DB629CAEBE500D46F6D /* SeccionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeccionItem.m; sourceTree = "<group>"; };
 		F65C731A29C0CFB000FC59D2 /* SCCollection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCollection.h; sourceTree = "<group>"; };
 		F65C731B29C0CFB000FC59D2 /* SCCollection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCollection.m; sourceTree = "<group>"; };
 		F66B790629B8993A00A1A40E /* TimeShaftItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeShaftItem.h; sourceTree = "<group>"; };
 		F66B790729B8993A00A1A40E /* TimeShaftItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeShaftItem.m; sourceTree = "<group>"; };
-		F66B790929B8B2A500A1A40E /* Quality.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quality.h; sourceTree = "<group>"; };
-		F66B790A29B8B2A500A1A40E /* Quality.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Quality.m; sourceTree = "<group>"; };
+		F66B790929B8B2A500A1A40E /* GetFrame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetFrame.h; sourceTree = "<group>"; };
+		F66B790A29B8B2A500A1A40E /* GetFrame.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetFrame.m; sourceTree = "<group>"; };
 		F68E1E6929B78F88006C4762 /* version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
 		F68E1E6A29B78F88006C4762 /* buffersrc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buffersrc.h; sourceTree = "<group>"; };
 		F68E1E6B29B78F88006C4762 /* buffersink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = buffersink.h; sourceTree = "<group>"; };
@@ -260,8 +263,8 @@
 		F68E1EEA29B7912F006C4762 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		F68E1EEC29B79154006C4762 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		F68E1EF129B7934A006C4762 /* one_frame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = one_frame.h; sourceTree = "<group>"; };
-		F695D33B29C082B400035976 /* QualityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QualityModel.h; sourceTree = "<group>"; };
-		F695D33C29C082B400035976 /* QualityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QualityModel.m; sourceTree = "<group>"; };
+		F695D33B29C082B400035976 /* FrameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrameModel.h; sourceTree = "<group>"; };
+		F695D33C29C082B400035976 /* FrameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FrameModel.m; sourceTree = "<group>"; };
 		F695D33E29C092E300035976 /* IndexModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndexModel.h; sourceTree = "<group>"; };
 		F695D33F29C092E300035976 /* IndexModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndexModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -312,10 +315,14 @@
 		F617A1F629B713B6004CADEB /* SCCut */ = {
 			isa = PBXGroup;
 			children = (
-				F68E1EEE29B79214006C4762 /* C */,
-				F68E1E6629B78F4F006C4762 /* ffmpeglib */,
 				F617A51229B75D32004CADEB /* SaveCache */,
 				F617A4D229B73E56004CADEB /* lib */,
+				F68E1E6629B78F4F006C4762 /* ffmpeglib */,
+				F68E1EEE29B79214006C4762 /* C */,
+				F6490DBB29CAEE5A00D46F6D /* tools */,
+				F6490DBA29CAEE1B00D46F6D /* models */,
+				F6490DB929CAEDFA00D46F6D /* views */,
+				F6490DB829CAEDD800D46F6D /* iitems */,
 				F617A4CE29B73C75004CADEB /* album */,
 				F617A24229B72347004CADEB /* public */,
 				F617A21129B717D8004CADEB /* controllers */,
@@ -347,18 +354,6 @@
 				F617A21629B71829004CADEB /* Welcome.m */,
 				F617A21829B71867004CADEB /* CutControler.h */,
 				F617A21929B71867004CADEB /* CutControler.m */,
-				F66B790629B8993A00A1A40E /* TimeShaftItem.h */,
-				F66B790729B8993A00A1A40E /* TimeShaftItem.m */,
-				F66B790929B8B2A500A1A40E /* Quality.h */,
-				F66B790A29B8B2A500A1A40E /* Quality.m */,
-				F695D33B29C082B400035976 /* QualityModel.h */,
-				F695D33C29C082B400035976 /* QualityModel.m */,
-				F695D33E29C092E300035976 /* IndexModel.h */,
-				F695D33F29C092E300035976 /* IndexModel.m */,
-				F65C731A29C0CFB000FC59D2 /* SCCollection.h */,
-				F65C731B29C0CFB000FC59D2 /* SCCollection.m */,
-				F6490DB229C994C200D46F6D /* SelectedView.h */,
-				F6490DB329C994C200D46F6D /* SelectedView.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -479,6 +474,48 @@
 				F617A65929B78CEA004CADEB /* libswscale.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F6490DB829CAEDD800D46F6D /* iitems */ = {
+			isa = PBXGroup;
+			children = (
+				F66B790629B8993A00A1A40E /* TimeShaftItem.h */,
+				F66B790729B8993A00A1A40E /* TimeShaftItem.m */,
+				F6490DB529CAEBE500D46F6D /* SeccionItem.h */,
+				F6490DB629CAEBE500D46F6D /* SeccionItem.m */,
+			);
+			path = iitems;
+			sourceTree = "<group>";
+		};
+		F6490DB929CAEDFA00D46F6D /* views */ = {
+			isa = PBXGroup;
+			children = (
+				F6490DB229C994C200D46F6D /* SelectedView.h */,
+				F6490DB329C994C200D46F6D /* SelectedView.m */,
+				F65C731A29C0CFB000FC59D2 /* SCCollection.h */,
+				F65C731B29C0CFB000FC59D2 /* SCCollection.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		F6490DBA29CAEE1B00D46F6D /* models */ = {
+			isa = PBXGroup;
+			children = (
+				F695D33B29C082B400035976 /* FrameModel.h */,
+				F695D33C29C082B400035976 /* FrameModel.m */,
+				F695D33E29C092E300035976 /* IndexModel.h */,
+				F695D33F29C092E300035976 /* IndexModel.m */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		F6490DBB29CAEE5A00D46F6D /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				F66B790929B8B2A500A1A40E /* GetFrame.h */,
+				F66B790A29B8B2A500A1A40E /* GetFrame.m */,
+			);
+			path = tools;
 			sourceTree = "<group>";
 		};
 		F68E1E6629B78F4F006C4762 /* ffmpeglib */ = {
@@ -753,7 +790,7 @@
 				F617A50D29B7406D004CADEB /* MASViewAttribute.m in Sources */,
 				F617A51129B744A6004CADEB /* MBProgressHUD.m in Sources */,
 				F695D34029C092E300035976 /* IndexModel.m in Sources */,
-				F66B790B29B8B2A500A1A40E /* Quality.m in Sources */,
+				F66B790B29B8B2A500A1A40E /* GetFrame.m in Sources */,
 				F65C731C29C0CFB000FC59D2 /* SCCollection.m in Sources */,
 				F617A50429B7406D004CADEB /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				F617A4DE29B73E65004CADEB /* SVRadialGradientLayer.m in Sources */,
@@ -762,7 +799,7 @@
 				F617A50B29B7406D004CADEB /* MASConstraint.m in Sources */,
 				F617A1F929B713B6004CADEB /* AppDelegate.m in Sources */,
 				F617A50629B7406D004CADEB /* MASCompositeConstraint.m in Sources */,
-				F695D33D29C082B400035976 /* QualityModel.m in Sources */,
+				F695D33D29C082B400035976 /* FrameModel.m in Sources */,
 				F6490DB429C994C200D46F6D /* SelectedView.m in Sources */,
 				F617A50729B7406D004CADEB /* MASConstraintMaker.m in Sources */,
 				F617A50529B7406D004CADEB /* ViewController+MASAdditions.m in Sources */,
@@ -776,6 +813,7 @@
 				F617A4E029B73E65004CADEB /* SVProgressHUD.m in Sources */,
 				F617A1FC29B713B6004CADEB /* SceneDelegate.m in Sources */,
 				F617A50929B7406D004CADEB /* NSArray+MASAdditions.m in Sources */,
+				F6490DB729CAEBE500D46F6D /* SeccionItem.m in Sources */,
 				F617A21A29B71867004CADEB /* CutControler.m in Sources */,
 				F617A50C29B7406D004CADEB /* MASViewConstraint.m in Sources */,
 				F617A4DF29B73E65004CADEB /* SVProgressAnimatedView.m in Sources */,
@@ -922,7 +960,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UC4C6H8RR8;
+				DEVELOPMENT_TEAM = L23Q5PD4Y3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SCCut/other/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "我想使用你的相册";
@@ -955,7 +993,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UC4C6H8RR8;
+				DEVELOPMENT_TEAM = L23Q5PD4Y3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SCCut/other/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "我想使用你的相册";

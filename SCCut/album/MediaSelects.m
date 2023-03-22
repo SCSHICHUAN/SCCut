@@ -527,6 +527,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
                             model.index = index;
                             [self.medias addObject:model];
                             [self requsetOriginSourceDone:hud];
+                            
+                            
+                            NSLog(@"time:%lld",asset.duration.value/asset.duration.timescale);
+                            
+                            
                             index++;
                             
                         } else {

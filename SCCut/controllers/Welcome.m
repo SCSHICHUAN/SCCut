@@ -10,7 +10,7 @@
 #import "MediaSelects.h"
 #import "CacheModel.h"
 #import "Cache.h"
-#import "Quality.h"
+#import "GetFrame.h"
 #import <Photos/Photos.h>
 #import "IndexModel.h"
 
@@ -61,11 +61,20 @@
     [cut addPlayItem];
     [self.navigationController presentViewController:cut animated:YES completion:nil];
     
+
+    return;
+    
+    NSMutableArray *session = [NSMutableArray array];
+    for (NSInteger i = 0; i < sources.count; i++) {
+        NSMutableArray *part = [NSMutableArray array];
+        [session addObject:part];
+        cut.sourceSessionArry = session;
+    }
+    
     for (NSInteger i = 0; i < sources.count; i++) {
         CacheModel *model = sources[i];
         if(model.mediaType == MediaType_video){
-            [Quality QualitychangeInput:model.avAsset witchIndex:i];
-//            [Quality GetFramesMetal:model.avAsset witchIndex:i];
+            [GetFrame QualitychangeInput:model.avAsset witchIndex:i];
         }
     }
 }
