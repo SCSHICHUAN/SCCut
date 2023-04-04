@@ -69,7 +69,7 @@
 {
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     //    panGestureRecognizer.delegate = self;
-    [self addGestureRecognizer:panGestureRecognizer];
+//    [self addGestureRecognizer:panGestureRecognizer];
 }
 -(void)addpanLeft
 {

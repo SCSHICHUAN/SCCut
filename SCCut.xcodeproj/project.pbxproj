@@ -58,6 +58,10 @@
 		F68E1EED29B79154006C4762 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F68E1EEC29B79154006C4762 /* CoreMedia.framework */; };
 		F695D33D29C082B400035976 /* FrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F695D33C29C082B400035976 /* FrameModel.m */; };
 		F695D34029C092E300035976 /* IndexModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F695D33F29C092E300035976 /* IndexModel.m */; };
+		F6BDBD7F29CC467C00767BC9 /* AVPlayer+SeekSmoothly.m in Sources */ = {isa = PBXBuildFile; fileRef = F6BDBD7E29CC467B00767BC9 /* AVPlayer+SeekSmoothly.m */; };
+		F6E5281529D9535B00996E23 /* ZYVideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5281429D9535B00996E23 /* ZYVideoEditor.swift */; };
+		F6E5281729D9587F00996E23 /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E5281629D9587F00996E23 /* TestController.swift */; };
+		F6E5281C29DAD77600996E23 /* SCCutPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F6E5281B29DAD77600996E23 /* SCCutPlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -267,6 +271,13 @@
 		F695D33C29C082B400035976 /* FrameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FrameModel.m; sourceTree = "<group>"; };
 		F695D33E29C092E300035976 /* IndexModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndexModel.h; sourceTree = "<group>"; };
 		F695D33F29C092E300035976 /* IndexModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndexModel.m; sourceTree = "<group>"; };
+		F6BDBD7D29CC467B00767BC9 /* AVPlayer+SeekSmoothly.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVPlayer+SeekSmoothly.h"; sourceTree = "<group>"; };
+		F6BDBD7E29CC467B00767BC9 /* AVPlayer+SeekSmoothly.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AVPlayer+SeekSmoothly.m"; sourceTree = "<group>"; };
+		F6E5281129D9531800996E23 /* SCCut-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SCCut-Bridging-Header.h"; sourceTree = "<group>"; };
+		F6E5281429D9535B00996E23 /* ZYVideoEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZYVideoEditor.swift; sourceTree = "<group>"; };
+		F6E5281629D9587F00996E23 /* TestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
+		F6E5281A29DAD77600996E23 /* SCCutPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCutPlayer.h; sourceTree = "<group>"; };
+		F6E5281B29DAD77600996E23 /* SCCutPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCutPlayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +309,9 @@
 		F617A1EB29B713B6004CADEB = {
 			isa = PBXGroup;
 			children = (
+				F6E5281129D9531800996E23 /* SCCut-Bridging-Header.h */,
+				F6E5281629D9587F00996E23 /* TestController.swift */,
+				F6E5281429D9535B00996E23 /* ZYVideoEditor.swift */,
 				F617A1F629B713B6004CADEB /* SCCut */,
 				F617A1F529B713B6004CADEB /* Products */,
 				F617A65629B78CEA004CADEB /* Frameworks */,
@@ -494,6 +508,8 @@
 				F6490DB329C994C200D46F6D /* SelectedView.m */,
 				F65C731A29C0CFB000FC59D2 /* SCCollection.h */,
 				F65C731B29C0CFB000FC59D2 /* SCCollection.m */,
+				F6E5281A29DAD77600996E23 /* SCCutPlayer.h */,
+				F6E5281B29DAD77600996E23 /* SCCutPlayer.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -514,6 +530,8 @@
 			children = (
 				F66B790929B8B2A500A1A40E /* GetFrame.h */,
 				F66B790A29B8B2A500A1A40E /* GetFrame.m */,
+				F6BDBD7D29CC467B00767BC9 /* AVPlayer+SeekSmoothly.h */,
+				F6BDBD7E29CC467B00767BC9 /* AVPlayer+SeekSmoothly.m */,
 			);
 			path = tools;
 			sourceTree = "<group>";
@@ -746,6 +764,7 @@
 				TargetAttributes = {
 					F617A1F329B713B6004CADEB = {
 						CreatedOnToolsVersion = 14.1;
+						LastSwiftMigration = 1410;
 					};
 				};
 			};
@@ -789,6 +808,7 @@
 				F617A50A29B7406D004CADEB /* View+MASAdditions.m in Sources */,
 				F617A50D29B7406D004CADEB /* MASViewAttribute.m in Sources */,
 				F617A51129B744A6004CADEB /* MBProgressHUD.m in Sources */,
+				F6E5281C29DAD77600996E23 /* SCCutPlayer.m in Sources */,
 				F695D34029C092E300035976 /* IndexModel.m in Sources */,
 				F66B790B29B8B2A500A1A40E /* GetFrame.m in Sources */,
 				F65C731C29C0CFB000FC59D2 /* SCCollection.m in Sources */,
@@ -796,9 +816,11 @@
 				F617A4DE29B73E65004CADEB /* SVRadialGradientLayer.m in Sources */,
 				F617A21729B71829004CADEB /* Welcome.m in Sources */,
 				F617A51529B75D8C004CADEB /* Cache.m in Sources */,
+				F6E5281529D9535B00996E23 /* ZYVideoEditor.swift in Sources */,
 				F617A50B29B7406D004CADEB /* MASConstraint.m in Sources */,
 				F617A1F929B713B6004CADEB /* AppDelegate.m in Sources */,
 				F617A50629B7406D004CADEB /* MASCompositeConstraint.m in Sources */,
+				F6E5281729D9587F00996E23 /* TestController.swift in Sources */,
 				F695D33D29C082B400035976 /* FrameModel.m in Sources */,
 				F6490DB429C994C200D46F6D /* SelectedView.m in Sources */,
 				F617A50729B7406D004CADEB /* MASConstraintMaker.m in Sources */,
@@ -809,6 +831,7 @@
 				F617A4E129B73E65004CADEB /* SVIndefiniteAnimatedView.m in Sources */,
 				F617A4E829B7403A004CADEB /* CollectionViewCell.m in Sources */,
 				F617A51829B763F3004CADEB /* CacheModel.m in Sources */,
+				F6BDBD7F29CC467C00767BC9 /* AVPlayer+SeekSmoothly.m in Sources */,
 				F617A50829B7406D004CADEB /* MASLayoutConstraint.m in Sources */,
 				F617A4E029B73E65004CADEB /* SVProgressHUD.m in Sources */,
 				F617A1FC29B713B6004CADEB /* SceneDelegate.m in Sources */,
@@ -958,6 +981,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L23Q5PD4Y3;
@@ -981,6 +1005,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pdd.-cut";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SCCut-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = SCCut/ffmpeglib/include;
 			};
@@ -991,6 +1018,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L23Q5PD4Y3;
@@ -1014,6 +1042,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pdd.-cut";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SCCut-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = SCCut/ffmpeglib/include;
 			};

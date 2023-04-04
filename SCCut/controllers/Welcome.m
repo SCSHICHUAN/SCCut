@@ -13,6 +13,10 @@
 #import "GetFrame.h"
 #import <Photos/Photos.h>
 #import "IndexModel.h"
+#import "SCCutPlayer.h"
+
+
+
 
 @interface Welcome ()<MediaSelectsDelegate>
 @property (nonatomic,strong)UIButton *start;
@@ -55,7 +59,33 @@
 #pragma mark-MediaSelectsDelegate
 -(void)selectVideosAndimages:(NSMutableArray *)sources{
     
+    NSMutableArray *arr = [NSMutableArray array];
+    for (CacheModel *mo in sources) {
+        [arr addObject:mo.avAsset];
+    }
+    
+    
+    
+    SCCutPlayer *play = [[SCCutPlayer alloc] init];
+    [play addAssets:arr];
+    
+    
+ 
+    
+//   TestController *test = [[TestController alloc] init];
+//    test.modalPresentationStyle = UIModalPresentationFullScreen;
+//    [test startWithArry:arr];
+//
+//
+//
+//    [self.navigationController presentViewController:test animated:YES completion:nil];
+//
+//
+//
+//    return;
     CutControler *cut = [[CutControler alloc] init];
+    cut.composition1 = play.composition;
+    cut.videoComposition1 = play.videoComposition;
     cut.assetArray = sources;
     cut.modalPresentationStyle = UIModalPresentationFullScreen;
     [cut addPlayItem];

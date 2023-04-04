@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CacheModel.h"
+#import <AVFoundation/AVFoundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong) NSMutableArray *assetArray;
 @property(nonatomic,strong) NSMutableArray *sourceSessionArry;
 -(void)addPlayItem;
+
+@property(nonatomic,strong)AVMutableComposition *composition1;
+@property(nonatomic,strong)AVMutableVideoComposition *videoComposition1;
 
 @end
 
