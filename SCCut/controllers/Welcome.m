@@ -47,7 +47,6 @@
 
 -(void)started{
     
-    
     MediaSelects *vc = [[MediaSelects alloc] init];
     vc.modalPresentationStyle = UIModalPresentationFullScreen;
     vc.delegate = self;
@@ -64,25 +63,10 @@
         [arr addObject:mo.avAsset];
     }
     
-    
-    
     SCCutPlayer *play = [[SCCutPlayer alloc] init];
     [play addAssets:arr];
     
     
- 
-    
-//   TestController *test = [[TestController alloc] init];
-//    test.modalPresentationStyle = UIModalPresentationFullScreen;
-//    [test startWithArry:arr];
-//
-//
-//
-//    [self.navigationController presentViewController:test animated:YES completion:nil];
-//
-//
-//
-//    return;
     CutControler *cut = [[CutControler alloc] init];
     cut.composition1 = play.composition;
     cut.videoComposition1 = play.videoComposition;

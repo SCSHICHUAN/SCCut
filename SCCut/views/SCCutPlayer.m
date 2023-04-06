@@ -13,6 +13,7 @@
 
 @property(nonatomic,assign)NSMutableArray <NSValue*>*timeRanges;
 @property(nonatomic,strong)NSMutableArray *assets;
+@property (nonatomic,assign)CGSize nusize;
 
 @end
 
@@ -29,17 +30,23 @@
 -(void)initData{
     
     if(self.renderSize.width <= 0){
-        self.renderSize = CGSizeMake(K_WIDTH, (K_WIDTH)*(9/16.0));
+        self.renderSize = CGSizeMake(K_WIDTH * 2, (K_WIDTH)*(9/16.0) * 2);
     }
+    
+    if(self.playSize.width <= 0){
+        self.playSize = CGSizeMake(K_WIDTH, (K_WIDTH)*(9/16.0));
+    }
+    
     self.assets = [NSMutableArray array];
     self.timeRanges = [NSMutableArray array];
     
     self.composition = [AVMutableComposition composition];
-    self.composition.naturalSize = CGSizeMake(self.renderSize.width * 2, self.renderSize.height * 2);
-    
-    self.videoComposition = [AVMutableVideoComposition videoComposition];
+    self.videoComposition = [AVMutableVideoComposition videoCompositionWithPropertiesOfAsset:self.composition];
     self.videoComposition.frameDuration = CMTimeMake(1, 60);
+    self.composition.naturalSize = self.renderSize;
     self.videoComposition.renderSize = self.renderSize;
+    
+    
     
 }
 
@@ -94,6 +101,7 @@
         
         
         passThroughTimeRanges[i] = CMTimeRangeMake(nextClipStartTime, timeRangeInAsset.duration);
+        
         
         
         if(i > 0){//第二个资源开始要减去头尾的过渡时间
@@ -159,34 +167,122 @@
     }
     
     
+    
     self.videoComposition.instructions = instructions;
+    
     
 }
 
 -(CGAffineTransform)changeVideoSizeAndVirection:(AVMutableVideoCompositionLayerInstruction *)passThroughLayer asset:(AVAsset*)asset{
     
-    CGAffineTransform transform = CGAffineTransformMakeTranslation(0,0);
     
-    AVAssetTrack *assetTrack  = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
-    CGSize asstSize = assetTrack.naturalSize;
+    AVAssetTrack *track = [asset tracksWithMediaType:AVMediaTypeVideo].firstObject;
+    CGSize sourceSize = track.naturalSize;
+    
+    //reand size play size scal
+    CGFloat k_r_p = self.renderSize.width/self.playSize.width;
+    
+    //source scal to render size
+    CGAffineTransform transform = CGAffineTransformMakeTranslation(0,0);
+    transform = CGAffineTransformTranslate(transform, 0.000000000000000000001, 0.0);
+    
+    /*
+     先照高度比例来把源视频缩放到self.renderSize中,高度铺满,查看宽度情况
+     如果宽度超出renderSize.width,就按照高度比例缩放
+     */
+    CGFloat k_target = 1;
+    CGFloat k_h_target = self.renderSize.height/sourceSize.height;
+    CGFloat w_target = sourceSize.width * k_h_target;
+    
+    if(w_target < self.renderSize.width){
+        k_target = k_h_target;
+    }else if(w_target == self.renderSize.width){
+        k_target = k_h_target;
+    } else{
+        k_target = self.renderSize.width/sourceSize.width;
+    }
+    transform =  CGAffineTransformScale(transform,k_target,k_target);
+    
+    //source 缩放到 render size 的大小
+    CGFloat source_in_render_w = sourceSize.width * k_target;
+    CGFloat source_in_render_h = sourceSize.height * k_target;
+    
+    //source 缩放到 plarey size 的大小
+    CGFloat source_in_player_w_0 = source_in_render_w / k_r_p;
+    CGFloat source_in_player_h_0 = source_in_render_h / k_r_p;
+    
+//    CGFloat source_in_player_w_90 = source_in_render_w / k_r_p / k_r_p;
+    CGFloat source_in_player_h_90 = source_in_render_h / k_r_p / k_r_p;
+   
+    
     
     NSInteger deg = [self assetDegress:asset];
     
-    if(deg == 90){
-        transform =  CGAffineTransformMakeTranslation(K_WIDTH/2,0);
-        transform =  CGAffineTransformScale(transform,K_WIDTH/asstSize.width,((K_WIDTH)*(9/16.0))/asstSize.height);
+    if(deg == 0){
+        
+        
+        CGFloat k = (1/k_target) * k_r_p;
+        
+        if(source_in_render_w == self.renderSize.width){
+            //宽度填满播放器
+            CGFloat offset = (self.playSize.height/2.0 - source_in_player_h_0/2.0);
+            transform =  CGAffineTransformTranslate(transform, 0 , offset * k );
+        }else{
+            //高度填满播放器
+            CGFloat offset = (self.playSize.width/2.0 - source_in_player_w_0/2.0);
+            transform =  CGAffineTransformTranslate(transform, offset * k , 0);
+        }
+
+        
+    }else if(deg == 90){
+        
         transform =  CGAffineTransformRotate(transform, M_PI/2.0);
-        transform =  CGAffineTransformScale(transform,(9/16.0),9/16.0);
-        transform =  CGAffineTransformTranslate(transform,0,-K_WIDTH*3);
-    }else if(deg == 0 && asstSize.width > asstSize.height){
-        transform =  CGAffineTransformScale(transform,K_WIDTH/asstSize.width,((K_WIDTH)*(9/16.0))/asstSize.height);
-    }else if(deg == 0 && asstSize.width < asstSize.height){
-        transform =  CGAffineTransformTranslate(transform, K_WIDTH/2, 0);
-        transform =  CGAffineTransformScale(transform,K_WIDTH/asstSize.width,((K_WIDTH)*(16/9.0))/asstSize.height);
-        transform =  CGAffineTransformScale(transform,9/16.0,9/16.0);
-        transform =  CGAffineTransformScale(transform,9/16.0,9/16.0);
-        transform =  CGAffineTransformTranslate(transform,-K_WIDTH*3,0);
+        
+        if(source_in_render_w == self.renderSize.width){
+            //宽度填满播放器
+            CGFloat k_scale = self.renderSize.height/self.renderSize.width;
+            CGFloat k = (1/k_target) * k_r_p * (1/k_scale);
+            CGFloat offset = self.playSize.width/2.0 + source_in_player_h_90/2.0;
+           
+            transform =  CGAffineTransformScale(transform,k_scale,k_scale);
+            transform =  CGAffineTransformTranslate(transform, 0 ,-offset * k );
+        }else{
+            
+            
+            
+            //高度填满播放器
+            CGFloat k_scale = self.renderSize.width/self.renderSize.height;
+            
+            CGFloat k = (1/k_target) * k_r_p * (1/k_scale);
+            CGFloat offset_x = self.playSize.width;
+            CGFloat offset_y =self.playSize.height/2.0 * k -  sourceSize.width/2.0;
+
+            transform =  CGAffineTransformScale(transform,k_scale,k_scale);
+            transform =  CGAffineTransformTranslate(transform, offset_y,-offset_x * k);
+        }
+        
+    }else if(deg == 180){
+        
+    }else if(deg == 270){
+        
+        transform =  CGAffineTransformRotate(transform, -M_PI/2.0);
+        
+        if(source_in_render_w == self.renderSize.width){
+            //宽度填满播放器
+          
+        }else{
+            //高度填满播放器
+            CGFloat k_scale = self.renderSize.width/self.renderSize.height;
+            CGFloat k = (1/k_target) * k_r_p * (1/k_scale);
+            CGFloat source_in_player_w = sourceSize.width;
+            CGFloat offset_y = self.playSize.height/2.0 * k + source_in_player_w/2.0;
+
+            transform =  CGAffineTransformScale(transform,k_scale,k_scale);
+            transform =  CGAffineTransformTranslate(transform, -offset_y,0);
+        }
     }
+    
+    
     return transform;
 }
 
@@ -198,15 +294,15 @@
  *      | tx ty 1 |     |  0  0  1 |   |  0  0  1 |   |   0       0     1 |   | tx ty 1 |
  *  CGAffineTransform      scale           shear            rotation          translation
  *
-   sin(90)  =  1
-   sin(180) =  0
-   sin(270) = -1
-   sin(360) =  0
+ sin(90)  =  1
+ sin(180) =  0
+ sin(270) = -1
+ sin(360) =  0
  
-   cos(90)  =  0
-   cos(180) = -1
-   cos(270) =  0
-   cos(360) =  1
+ cos(90)  =  0
+ cos(180) = -1
+ cos(270) =  0
+ cos(360) =  1
  
  */
 -(NSInteger)assetDegress:(AVAsset*)asset{
