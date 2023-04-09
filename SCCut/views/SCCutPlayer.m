@@ -74,9 +74,6 @@
     //过渡的时间范围
     CMTimeRange *transitionTimeRanges = alloca(sizeof(CMTimeRange) * assetCount);
     
-    
-    int tmp = 0;
-    CMTime tmpTime;
     for (int i = 0; i < assetCount ; i++) {
         
         NSInteger alternatingIndex = i % 2; // alternating targets: 0, 1, 0, 1, ...
