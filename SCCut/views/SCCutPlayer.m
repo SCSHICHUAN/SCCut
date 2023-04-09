@@ -10,7 +10,7 @@
 
 @interface SCCutPlayer ()
 
-
+@property(nonatomic,assign)CGSize renderSize;
 @property(nonatomic,assign)NSMutableArray <NSValue*>*timeRanges;
 @property(nonatomic,strong)NSMutableArray *assets;
 @property (nonatomic,assign)CGSize nusize;
@@ -29,13 +29,10 @@
 
 -(void)initData{
     
-    if(self.renderSize.width <= 0){
-        self.renderSize = CGSizeMake(K_WIDTH * 2, (K_WIDTH)*(9/16.0) * 2);
-    }
-    
     if(self.playSize.width <= 0){
-        self.playSize = CGSizeMake(K_WIDTH, (K_WIDTH)*(9/16.0));
+        self.playSize = CGSizeMake(K_WIDTH * 0.8, (K_WIDTH * 16/9.0) * 0.8);
     }
+    self.renderSize = CGSizeMake(self.playSize.width * 2, self.playSize.height * 2);
     
     self.assets = [NSMutableArray array];
     self.timeRanges = [NSMutableArray array];
@@ -127,8 +124,11 @@
         
     }
     
+    
+    
+    
     NSMutableArray *instructions = [NSMutableArray array];
-    NSMutableArray *trackMixArray = [NSMutableArray array];
+    //    NSMutableArray *trackMixArray = [NSMutableArray array];
     for (int i = 0; i < assetCount; i++) {
         NSInteger alternatingIndex = i % 2;
         
@@ -187,20 +187,19 @@
     transform = CGAffineTransformTranslate(transform, 0.000000000000000000001, 0.0);
     
     
+    //选转视频到正方向
     CGFloat deg = [self assetDegress:asset];
     transform =  CGAffineTransformRotate(transform, deg);
-    
-    
-   
-    CGFloat k_target = 1;
-    CGFloat k_h_target = self.renderSize.height/sourceSize.height;
-    CGFloat k_w_target = self.renderSize.width/sourceSize.width;
-    CGFloat w_target = sourceSize.width * k_h_target;
-    
     
     if(deg == M_PI * 1/2.0 || deg == M_PI * 3/2.0){
         sourceSize = CGSizeMake(sourceSize.height, sourceSize.width);
     }
+    
+    
+    CGFloat k_target = 1;
+    CGFloat k_h_target = self.renderSize.height/sourceSize.height;
+    CGFloat k_w_target = self.renderSize.width/sourceSize.width;
+    CGFloat w_target = sourceSize.width * k_h_target;
     
     /*
      照高度比例来把源视频缩放到self.renderSize中,高度铺满,查看宽度情况
@@ -212,79 +211,49 @@
         k_target = k_w_target;
     }
     
+    //asset 第一次比例缩放
     transform =  CGAffineTransformScale(transform,k_target,k_target);
     
-    //根据视频比例判断这么填充播放器
+    
+    //根据视频比例判断,水平或者垂直填充播放器
     CGFloat render_w_h_scale = self.renderSize.width/self.renderSize.height;
     CGFloat source_w_h_scale = sourceSize.width/sourceSize.height;
     
     
+    CGFloat k = (1/k_target) * k_r_p;//把实际尺寸按照transform缩放,
+    
+    
+    //把视频移动到中心位置
     if(deg == 0.0){//0
         
-        //source 缩放到 plarey size 的大小
-        CGFloat source_in_player_w =  sourceSize.width * k_target / k_r_p;
-        CGFloat source_in_player_h =  sourceSize.height * k_target / k_r_p;
-
-        CGFloat k = (1/k_target) * k_r_p;
+        if(render_w_h_scale >= source_w_h_scale){//高度填满播放器
+            transform =  CGAffineTransformTranslate(transform, self.playSize.width/2.0 * k - sourceSize.width/2.0 ,0);
+        }else if(render_w_h_scale < source_w_h_scale){//宽度填满播放器
+            transform =  CGAffineTransformTranslate(transform, 0,  self.playSize.height/2.0 * k - sourceSize.height/2.0);
+        }
+        
+    }else if(deg == M_PI){//180
         
         if(render_w_h_scale >= source_w_h_scale){//高度填满播放器
-            CGFloat offset = (self.playSize.width/2.0 - source_in_player_w/2.0);
-            transform =  CGAffineTransformTranslate(transform, offset * k ,0);
+            transform =  CGAffineTransformTranslate(transform, -(self.playSize.width/2.0 * k + sourceSize.width/2.0),-self.playSize.height * k);
         }else if(render_w_h_scale < source_w_h_scale){//宽度填满播放器
-            CGFloat offset = (self.playSize.height/2.0 - source_in_player_h/2.0);
-            transform =  CGAffineTransformTranslate(transform, 0, offset * k);
+            transform =  CGAffineTransformTranslate(transform, -self.playSize.width * k,-(self.playSize.height/2.0 * k + sourceSize.height/2.0));
         }
         
     }else if(deg == M_PI * 1/2.0){//90
         
-            CGFloat k_scale_w = self.renderSize.width/self.renderSize.height;
-            CGFloat source_in_palyer_h = sourceSize.height * k_target * k_scale_w;
-            
-            if(render_w_h_scale >= source_w_h_scale){
-                //按照高度填满
-                CGFloat  k_scale_h = self.renderSize.height/source_in_palyer_h;
-                CGFloat  k = (1/k_target) * k_r_p * (1/k_scale_w) * (1/k_scale_h);
-                
-                CGFloat source_in_player_w =  sourceSize.width * k_target * k_scale_w * k_scale_h * (1/k_r_p);//按照相同比例转换
-                CGFloat offset_x = self.playSize.width/2.0 + source_in_player_w/2.0;
-                
-                transform =  CGAffineTransformScale(transform,k_scale_h,k_scale_h);
-                transform =  CGAffineTransformScale(transform,k_scale_w,k_scale_w);
-                transform =  CGAffineTransformTranslate(transform,0,-offset_x * k);
-                
-            }else if(render_w_h_scale < source_w_h_scale){
-                //按照宽度添满
-                CGFloat k = (1/k_target) * k_r_p * (1/k_scale_w);
-                
-                source_in_palyer_h = sourceSize.height * k_target * k_scale_w * (1/k_r_p);
-                CGFloat offset_x = self.playSize.width;
-                CGFloat offset_y = self.playSize.height/2.0 -  source_in_palyer_h/2.0;
-                
-                transform =  CGAffineTransformScale(transform,k_scale_w,k_scale_w);
-                transform =  CGAffineTransformTranslate(transform, offset_y * k,-offset_x * k);
-            }
-
-            
-        
-        
-    }else if(deg == M_PI){//180
+        if(render_w_h_scale >= source_w_h_scale){//按照高度填满
+            transform =  CGAffineTransformTranslate(transform,0,-(self.playSize.width/2.0 * k + sourceSize.width/2.0));
+        }else if(render_w_h_scale < source_w_h_scale){//按照宽度添满
+            transform =  CGAffineTransformTranslate(transform,self.playSize.height/2.0 * k - sourceSize.height/2.0,-self.playSize.width * k);
+        }
         
     }else if(deg ==  M_PI * 3/2.0){//270
         
-        
-        
-        if(0 == self.renderSize.width){
-            //宽度填满播放器
-          
-        }else{
-            //高度填满播放器
-            CGFloat k_scale = self.renderSize.width/self.renderSize.height;
-            CGFloat k = (1/k_target) * k_r_p * (1/k_scale);
-            CGFloat source_in_player_w = sourceSize.width;
-            CGFloat offset_y = self.playSize.height/2.0 * k + source_in_player_w/2.0;
-
-            transform =  CGAffineTransformScale(transform,k_scale,k_scale);
-            transform =  CGAffineTransformTranslate(transform, -offset_y,0);
+        if(render_w_h_scale >= source_w_h_scale){//按照高度填满
+            transform =  CGAffineTransformTranslate(transform,-self.playSize.height * k,self.playSize.width/2.0 * k - sourceSize.width/2.0);
+        }else if(render_w_h_scale < source_w_h_scale){//按照宽度添满
+            transform =  CGAffineTransformTranslate(transform, -(self.playSize.height/2.0 * k + sourceSize.height/2),0);
         }
     }
     

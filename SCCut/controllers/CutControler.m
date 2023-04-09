@@ -189,7 +189,7 @@ UIScrollViewDelegate>
         _backBtn.backgroundColor = UIColor.blackColor;
         [_backBtn setTitle:@"返回" forState:UIControlStateNormal];
         [_backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-        _backBtn.frame = CGRectMake(20, 100, 200, 40);
+        _backBtn.frame = CGRectMake(20, 60, 200, 40);
     }
     return _backBtn;
 }
@@ -199,7 +199,7 @@ UIScrollViewDelegate>
         _pleyBtn.backgroundColor = UIColor.blackColor;
         [_pleyBtn setTitle:@"play" forState:UIControlStateNormal];
         [_pleyBtn addTarget:self action:@selector(playBtn:) forControlEvents:UIControlEventTouchUpInside];
-        _pleyBtn.frame = CGRectMake(140, 100, 200, 40);
+        _pleyBtn.frame = CGRectMake(140, 60, 200, 40);
     }
     return _pleyBtn;
 }
@@ -344,7 +344,7 @@ UIScrollViewDelegate>
         _avPlarer = [[AVPlayer alloc] init];
         AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:_avPlarer];
         layer.backgroundColor = UIColor.blackColor.CGColor;
-        layer.frame = CGRectMake(0, 200, K_WIDTH, (K_WIDTH)*(9/16.0));
+        layer.frame = CGRectMake(10, 110, K_WIDTH * 0.8, (K_WIDTH * 16/9.0)*0.8);
         layer.videoGravity = AVLayerVideoGravityResizeAspect;
         [self.view.layer addSublayer:layer];
         [self addProgressObserver];
@@ -362,7 +362,7 @@ UIScrollViewDelegate>
 }
 -(UIView *)scaleLine{
     if(!_scaleLine){
-        _scaleLine = [[UIView alloc] initWithFrame:CGRectMake(K_WIDTH/2.0-1, K_HEIGHT-410, 2, 90)];
+        _scaleLine = [[UIView alloc] initWithFrame:CGRectMake(K_WIDTH/2.0-1, K_HEIGHT-170, 2, 90)];
         _scaleLine.backgroundColor = UIColor.redColor;
     }
     return _scaleLine;
@@ -387,7 +387,7 @@ UIScrollViewDelegate>
         layout.minimumLineSpacing = 0;
         layout.minimumInteritemSpacing = 0;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _seccionCollectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, K_HEIGHT-400, K_WIDTH, 50) collectionViewLayout:layout];
+        _seccionCollectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, K_HEIGHT-150, K_WIDTH, 50) collectionViewLayout:layout];
         [_seccionCollectView registerClass:[SeccionItem class] forCellWithReuseIdentifier:seccionItemIdent];
         _seccionCollectView.dataSource = self;
         _seccionCollectView.contentInset = UIEdgeInsetsMake(0, K_WIDTH/2.0, 0, K_WIDTH/2.0);

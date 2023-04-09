@@ -71,6 +71,8 @@
     cut.composition1 = play.composition;
     cut.videoComposition1 = play.videoComposition;
     cut.assetArray = sources;
+    
+    
     cut.modalPresentationStyle = UIModalPresentationFullScreen;
     [cut addPlayItem];
     [self.navigationController presentViewController:cut animated:YES completion:nil];

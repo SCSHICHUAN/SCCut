@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SCCutPlayer : UIView
 
 @property(nonatomic,assign)CGSize playSize;
-@property(nonatomic,assign)CGSize renderSize;
 @property(nonatomic,strong)AVMutableComposition *composition;
 @property(nonatomic,strong)AVMutableVideoComposition *videoComposition;
 
