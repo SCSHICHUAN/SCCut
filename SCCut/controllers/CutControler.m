@@ -31,7 +31,7 @@ UIScrollViewDelegate>
 @property(nonatomic,strong)UIButton *pleyBtn;
 @property(nonatomic,strong)UICollectionView *seccionCollectView;
 @property(nonatomic,strong)UIImageView *imgView;
-@property(nonatomic,strong)NSTimer *time;
+//@property(nonatomic,strong)NSTimer *time;
 @property(nonatomic,assign)NSInteger playItem;
 @property(nonatomic,strong)UIView *scaleLine;
 @property(nonatomic,strong)UILabel *lab;
@@ -217,7 +217,7 @@ UIScrollViewDelegate>
         [self.avPlarer play];
     }else{
         self.b = YES;
-        [self.time setFireDate:[NSDate distantFuture]];
+//        [self.time setFireDate:[NSDate distantFuture]];
         [send setTitle:@"paly" forState:UIControlStateNormal];
         [self.avPlarer pause];
     }
@@ -301,10 +301,10 @@ UIScrollViewDelegate>
     return [fileHandle readDataToEndOfFile];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [self.time setFireDate:[NSDate distantFuture]];
+-(void)viewWillDisappear:(BOOL)animated{
+    [self.seccionCollectView removeObserver:self forKeyPath:@"contentOffset"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 #pragma mark-GET
 
@@ -360,12 +360,12 @@ UIScrollViewDelegate>
     }
     return _scaleLine;
 }
--(NSTimer *)time{
-    if(!_time){
-        _time = [NSTimer scheduledTimerWithTimeInterval:1/4.0 target:self selector:@selector(play) userInfo:nil repeats:YES];
-    }
-    return _time;
-}
+//-(NSTimer *)time{
+//    if(!_time){
+//        _time = [NSTimer scheduledTimerWithTimeInterval:1/4.0 target:self selector:@selector(play) userInfo:nil repeats:YES];
+//    }
+//    return _time;
+//}
 -(UIImageView *)imgView{
     if(!_imgView){
         _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 600, K_WIDTH, (K_WIDTH)*(9/16.0))];

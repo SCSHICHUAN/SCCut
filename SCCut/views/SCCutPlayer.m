@@ -42,9 +42,7 @@
     self.videoComposition.frameDuration = CMTimeMake(1, 60);
     self.composition.naturalSize = self.renderSize;
     self.videoComposition.renderSize = self.renderSize;
-    
-    
-    
+
 }
 
 
@@ -59,7 +57,7 @@
 
 -(void)createTracks{
     
-    CMTime trasitionTime = CMTimeMake(0, 1);
+    CMTime trasitionTime = CMTimeMake(0.1, 1);
     CMTime nextClipStartTime = kCMTimeZero;//一个资源的开始时间,去除过渡时间
     NSInteger assetCount = self.assets.count;
     
@@ -77,7 +75,8 @@
     CMTimeRange *transitionTimeRanges = alloca(sizeof(CMTimeRange) * assetCount);
     
     
-    
+    int tmp = 0;
+    CMTime tmpTime;
     for (int i = 0; i < assetCount ; i++) {
         
         NSInteger alternatingIndex = i % 2; // alternating targets: 0, 1, 0, 1, ...
@@ -93,8 +92,12 @@
         AVAssetTrack *clipVideoTrack = [[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0];
         [compositionVideoTracks[alternatingIndex] insertTimeRange:timeRangeInAsset ofTrack:clipVideoTrack atTime:nextClipStartTime error:nil];
         //从asset中取出音频放入轨道[0]或者[1],资源完整时间范围
-        AVAssetTrack *clipAudioTrack = [[asset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0];
-        [compositionAudioTracks[alternatingIndex] insertTimeRange:timeRangeInAsset ofTrack:clipAudioTrack atTime:nextClipStartTime error:nil];
+        NSArray *audios = [asset tracksWithMediaType:AVMediaTypeAudio];
+        if(audios.count > 0 ){
+            AVAssetTrack *clipAudioTrack = [audios objectAtIndex:0];
+            [compositionAudioTracks[alternatingIndex] insertTimeRange:timeRangeInAsset ofTrack:clipAudioTrack atTime:nextClipStartTime error:nil];
+        }
+       
         
         
         passThroughTimeRanges[i] = CMTimeRangeMake(nextClipStartTime, timeRangeInAsset.duration);
@@ -124,9 +127,6 @@
         
     }
     
-    
-    
-    
     NSMutableArray *instructions = [NSMutableArray array];
     //    NSMutableArray *trackMixArray = [NSMutableArray array];
     for (int i = 0; i < assetCount; i++) {
@@ -149,19 +149,34 @@
         
         
         if (i+1 < assetCount) {
-            
+
             //初始化视频指令
             AVMutableVideoCompositionInstruction *instruction_video_transition = [AVMutableVideoCompositionInstruction videoCompositionInstruction];
+            
+            //设置视频过渡时间
+            instruction_video_transition.timeRange = transitionTimeRanges[i];
             
             //track选中layer指令
             AVMutableVideoCompositionLayerInstruction *layer_instruction_from
             = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTracks[alternatingIndex]];
             AVMutableVideoCompositionLayerInstruction *layer_instruction_to
             = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:compositionVideoTracks[1-alternatingIndex]];
+
+            
+            //设置过渡时video到layer的大小
+            CGAffineTransform transform_from = [self changeVideoSizeAndVirection:passThroughLayer asset:asset];
+            [layer_instruction_from setTransform:transform_from atTime:kCMTimeZero];
+            AVURLAsset *assetNext = self.assets[i+1];
+            CGAffineTransform transform_to = [self changeVideoSizeAndVirection:passThroughLayer asset:assetNext];
+            [layer_instruction_to setTransform:transform_to atTime:kCMTimeZero];
+
             
             //layer变换指令
             [layer_instruction_to setOpacityRampFromStartOpacity:0.0 toEndOpacity:1.0 timeRange:transitionTimeRanges[i]];
-            instruction_video_transition.layerInstructions = [NSArray arrayWithObjects:layer_instruction_from,layer_instruction_to ,nil];
+            instruction_video_transition.layerInstructions = [NSArray arrayWithObjects:layer_instruction_to,layer_instruction_from,nil];
+            
+            //添加指令
+            [instructions addObject:instruction_video_transition];
         }
         
     }
