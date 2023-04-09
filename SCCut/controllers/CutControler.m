@@ -84,13 +84,6 @@ UIScrollViewDelegate>
 //    hud.label.text = @"处理中";
     [self.seccionCollectView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveArr:) name:@"video_frame_image" object:nil];
-    
-    
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 200, 60, 60)];
-    view.backgroundColor = UIColor.redColor;
-    [self.view addSubview:view];
-    
 }
 #pragma mark-UICollectionViewDataSource
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
